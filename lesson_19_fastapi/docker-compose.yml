@@ -1,0 +1,17 @@
+services:
+  api:
+    build:
+      command: uvicorn main:app --host [IP_ADDRESS] --port 8000
+    ports:
+      - "8000:8000"
+
+  ui:
+    build:
+      command: python frontend.py
+    environment:
+      - API_URL=http://api:8000  
+    ports:
+      - "7860:7860"
+    depends_on:
+      - api
+    
